@@ -15,11 +15,15 @@ class ImageInfo:
         return "name: " + self.name + "\nwidth: " + str(self.x_pos) + "\nheight: " + str(self.y_pos) + "\nchannels: " + str(self.count) + "\ntemplate_name: " + self.template_name
 
     def to_json(self):
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+        if isinstance(self, ImageInfo):
+            return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+        else:
+            return None  # Retorne None para objetos que não são instâncias de ImageInfo
 
-def export_data(img, cont, template_name):
-    image_info = ImageInfo(img,25,30,cont, template_name)
+def export_data(img, cont, template_name, img_rgb):
+    image_info = ImageInfo(img, 25, 30, cont, template_name)
     json_str = image_info.to_json()
-    json_file_name = "image_info.json"
-    with open(json_file_name, "w") as json_file:
-        json_file.write(json_str)
+    if json_str is not None:
+        json_file_name = "./results/data/"+img_rgb.split('.')[0]+f"-{cont}.json"
+        with open(json_file_name, "w") as json_file:
+            json_file.write(json_str)
