@@ -18,7 +18,7 @@ class ImageInfo:
         if isinstance(self, ImageInfo):
             return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
         else:
-            return None  # Retorne None para objetos que não são instâncias de ImageInfo
+            return None
 
 def export_data(img, cont, template_name, img_rgb):
     image_info = ImageInfo(img, 25, 30, cont, template_name)

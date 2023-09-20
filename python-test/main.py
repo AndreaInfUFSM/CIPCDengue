@@ -22,8 +22,7 @@ def process(img_rgb, template, cont, img):
     for pt in zip(*loc[::-1]):
         cv.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (0,0,255), 2)
         cont+=1
-    cv.imwrite('./results/media/'+img+'-'+str(cont)+'.png',img_rgb)
-    return cont
+    return img_rgb, cont
 
 def main():
     path = './palhetas/'
@@ -36,7 +35,9 @@ def main():
             img_rgb = cv.imread(path+img)
             path_test(img_rgb)
             cont = 0
-            cont = process(img_rgb, template, cont, img)
+            img_rgb_proc, cont = process(img_rgb, template, cont, img)
+            if cont == 0: continue
+            cv.imwrite('./results/media/'+img+'-'+str(cont)+'.png',img_rgb_proc)
             export_data(img, cont, template_name, img)
 
 if __name__ == '__main__':
