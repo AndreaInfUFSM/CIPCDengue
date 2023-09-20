@@ -23,6 +23,6 @@ def export_data(img, cont, template_name, img_rgb, coordinates):
     image_info = ImageInfo(img, coordinates, cont, template_name)
     json_str = image_info.to_json()
     if json_str is not None:
-        json_file_name = "./results/data/"+img_rgb.split('.')[0]+f"-{cont}.json"
+        json_file_name = "./results/data/"+img_rgb.split('.')[0]+f"template-{template_name}"+f"-{cont}.json"
         with open(json_file_name, "w") as json_file:
             json_file.write(json_str)
