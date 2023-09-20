@@ -10,9 +10,6 @@ def convert_gray(img):
     img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     return img_gray
 
-def pointers(pt):
-    print('x: ', pt[0], 'y: ', pt[1])
-
 def process(img_rgb, template, cont, img):
     img_gray = convert_gray(img_rgb)
     w, h = template.shape[::-1]
