@@ -1,18 +1,17 @@
 import json
 
 class ImageInfo:
-    def __init__(self, name, x_pos, y_pos, count, template_name):
+    def __init__(self, name, coordinates_pair, count, template_name):
         self.name = name
-        self.x_pos = x_pos
-        self.y_pos = y_pos
+        self.coordinates_pair = coordinates_pair
         self.count = count
         self.template_name = template_name
 
     def __str__(self):
-        return "name: " + self.name + "\nwidth: " + str(self.x_pos) + "\nheight: " + str(self.y_pos) + "\nchannels: " + str(self.count) + "\ntemplate_name: " + self.template_name
+        return "name: " + self.name + "\nwidth: " + str(self.coordinates_pair) + "\nchannels: " + str(self.count) + "\ntemplate_name: " + self.template_name
 
     def __repr__(self):
-        return "name: " + self.name + "\nwidth: " + str(self.x_pos) + "\nheight: " + str(self.y_pos) + "\nchannels: " + str(self.count) + "\ntemplate_name: " + self.template_name
+        return "name: " + self.name + "\nwidth: " + str(self.coordinates_pair) + "\nchannels: " + str(self.count) + "\ntemplate_name: " + self.template_name
 
     def to_json(self):
         if isinstance(self, ImageInfo):
@@ -20,8 +19,8 @@ class ImageInfo:
         else:
             return None
 
-def export_data(img, cont, template_name, img_rgb):
-    image_info = ImageInfo(img, 25, 30, cont, template_name)
+def export_data(img, cont, template_name, img_rgb, coordinates):
+    image_info = ImageInfo(img, coordinates, cont, template_name)
     json_str = image_info.to_json()
     if json_str is not None:
         json_file_name = "./results/data/"+img_rgb.split('.')[0]+f"-{cont}.json"
