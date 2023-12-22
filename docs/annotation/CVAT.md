@@ -13,6 +13,8 @@ comment:  Review sobre Visão Computacional aplicada a contagem de ovos de mosqu
 
 -->
 
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/CIPCDengue/master/docs/annotation/CVAT.md)
+
 
 
 # Anotação de imagens com CVAT
