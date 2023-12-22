@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<annotations>
+  <version>1.1</version>
+  <meta>
+    <job>
+      <id>382470</id>
+      <size>1</size>
+      <mode>annotation</mode>
+      <overlap>0</overlap>
+      <bugtracker></bugtracker>
+      <created>2023-10-29 16:43:06.493498+00:00</created>
+      <updated>2023-10-29 17:24:20.018002+00:00</updated>
+      <subset>default</subset>
+      <start_frame>0</start_frame>
+      <stop_frame>0</stop_frame>
+      <frame_filter></frame_filter>
+      <segments>
+        <segment>
+          <id>382800</id>
+          <start>0</start>
+          <stop>0</stop>
+          <url>https://app.cvat.ai/api/jobs/382470</url>
+        </segment>
+      </segments>
+      <owner>
+        <username>andrea06</username>
+        <email>andrea@inf.ufsm.br</email>
+      </owner>
+      <assignee></assignee>
+      <labels>
+        <label>
+          <name>egg</name>
+          <color>#60a080</color>
+          <type>any</type>
+          <attributes>
+          </attributes>
+        </label>
+        <label>
+          <name>unsure</name>
+          <color>#138033</color>
+          <type>polygon</type>
+          <attributes>
+          </attributes>
+        </label>
+        <label>
+          <name>cluster</name>
+          <color>#876860</color>
+          <type>any</type>
+          <attributes>
+          </attributes>
+        </label>
+      </labels>
+    </job>
+    <dumped>2023-12-21 19:27:32.136989+00:00</dumped>
+  </meta>
+  <image id="0" name="cropped-06T-20200214_143650-x789-y50-w1773-h5175-ec28.jpg" width="1773" height="5175">
+    <ellipse label="egg" source="manual" occluded="0" cx="678.62" cy="1324.99" rx="10.57" ry="2.50" rotation="23.50" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="79.82" cy="3491.65" rx="10.18" ry="3.20" rotation="348.20" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="72.27" cy="3527.26" rx="2.96" ry="10.65" rotation="24.90" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="89.72" cy="3563.79" rx="10.56" ry="2.86" rotation="338.10" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1148.69" cy="1052.85" rx="2.81" ry="9.36" rotation="27.60" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1697.27" cy="3033.64" rx="2.48" ry="9.70" rotation="7.00" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1694.10" cy="3110.69" rx="3.05" ry="10.41" rotation="4.70" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1686.73" cy="3127.59" rx="2.89" ry="9.20" rotation="337.40" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1705.71" cy="3182.64" rx="8.38" ry="2.06" rotation="5.90" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1689.15" cy="3269.17" rx="10.02" ry="3.18" rotation="42.80" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1680.48" cy="3338.04" rx="3.00" ry="10.17" rotation="347.50" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1554.84" cy="3394.84" rx="9.16" ry="3.54" rotation="13.60" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1689.28" cy="3456.24" rx="3.32" ry="10.08" rotation="348.50" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1486.21" cy="3525.05" rx="3.15" ry="9.21" rotation="344.90" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1436.94" cy="3540.76" rx="3.41" ry="9.32" rotation="38.40" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1631.77" cy="3593.03" rx="9.71" ry="3.48" rotation="349.00" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1631.30" cy="3633.95" rx="2.85" ry="9.16" rotation="350.90" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1679.71" cy="3627.89" rx="10.47" ry="2.40" rotation="48.40" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1336.30" cy="3665.31" rx="1.81" ry="8.04" rotation="19.10" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1495.95" cy="3702.91" rx="3.15" ry="10.55" rotation="334.30" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1511.71" cy="3694.81" rx="3.00" ry="10.10" rotation="27.50" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1513.29" cy="3704.66" rx="3.13" ry="9.89" rotation="30.10" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1579.71" cy="3680.87" rx="2.80" ry="11.41" rotation="25.50" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1578.25" cy="3723.96" rx="3.58" ry="11.13" rotation="356.90" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1558.61" cy="3745.57" rx="2.80" ry="10.62" rotation="329.80" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1558.99" cy="3702.25" rx="2.80" ry="11.41" rotation="355.30" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1608.26" cy="3663.93" rx="2.80" ry="10.70" rotation="16.40" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1626.45" cy="3665.79" rx="2.48" ry="9.78" rotation="329.70" z_order="0">
+    </ellipse>
+    <ellipse label="egg" source="manual" occluded="0" cx="1639.65" cy="3662.35" rx="2.48" ry="9.78" rotation="349.40" z_order="0">
+    </ellipse>
+  </image>
+</annotations>
