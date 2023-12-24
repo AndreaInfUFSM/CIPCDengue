@@ -9,7 +9,7 @@ language: PT-BR
 
 narrator: Brazilian Portuguese Female
 
-comment:  Review sobre Visão Computacional aplicada a contagem de ovos de mosquitos
+comment:  Resumo sobre anotação de imagens para projeto de contagem de ovos em ovitrampas
 
 -->
 
@@ -20,7 +20,7 @@ comment:  Review sobre Visão Computacional aplicada a contagem de ovos de mosqu
 # Anotação de imagens com CVAT
 
 
-> Resumo para projeto de contagem de ovos em ovitrampas
+> Resumo sobre anotação de imagens para projeto de contagem de ovos em ovitrampas
 
 Profa. Andrea Schwertner Charão
 
@@ -34,11 +34,11 @@ O que é anotação de imagens?
 - Processo de demarcação e rotulagem de objetos em imagens
 - Provê contexto e informação de entrada para algoritmos de aprendizagem de máquina
 
-Por que é importante?
+Por que anotar imagens?
 
-- Para treinar modelos de aprendizagem de máquina a reconhecer nossos objetos de interesse
+- Necessário para treinar modelos de aprendizagem de máquina a reconhecer nossos objetos de interesse
 
-- Para obter altas taxas de acertos e generalização no reconhecimento / contagem de objetos
+- Importante para obter altas taxas de acertos e generalização no reconhecimento / contagem de objetos
 
 
 
@@ -55,6 +55,7 @@ Por que é importante?
 - **Organization**: grupo de usuários trabalhando em conjunto
 
   - Plano gratuito permite 1 organization com 3 usuários
+  - Facilita compartilhamento, mas não é obrigatório
 
 - **Project**: conjunto de tarefas de anotação com características em comum
 
@@ -68,8 +69,10 @@ Por que é importante?
 
 
 
-## Passos
+## Passo-a-passo
 
+- Nos próximos slides, temos um resumo de passos essenciais para começarmos a anotar imagens de ovitrampas
+- Estes e outros passos estão detalhados na documentação do CVAT: https://opencv.github.io/cvat/docs/manual/basics/
 
 ### Criar conta
 
@@ -77,19 +80,30 @@ Criar uma conta em: https://app.cvat.ai/auth/register (abrir email e clicar no l
 
 ![](img/cvat-register.png)
 
-### Login
+### Após Login
 
 Após Login, é mostrada uma tela com Tasks (inicialmente vazia)
 
-![](img/cvat-empty.png)
+Tela de Tasks vazia (sem Tasks ciradas ainda):
+
+<img src="img/cvat-empty.png"  width="45%" > 
+
+Tela com uma Task criada (ver mais adiante):
+
+<img src="img/cvat-task-list.png"  width="45%" >
 
 
 ### Criar Project
 
-Conjunto de tarefas de anotaçõo com características em comum
+Project: conjunto de tarefas de anotaçõo com características em comum
 
+Para criar:
 
-![](img/cvat-newproject.png)
+- Menu: Projects
+- Botão: `+` -> `Create a new project`
+- Preencher tela abaixo com configurações do projeto (ver adiante)
+
+![](img/cvat-new-project.png)
 
 #### Configurar projeto
 
@@ -107,13 +121,13 @@ Conjunto de tarefas de anotaçõo com características em comum
 - Label para um agrupamento de ovos (quando houver sobreposição que impeça distinguir ovos isoladamente)
 
   - Label name: `cluster`
-  - Selecionar `Any`
+  - Selecionar `Polygon`
   - Escolher cor
 
 - Label para possível ovo (incerteza)
 
   - Label name: `unsure`
-  - Selecionar `Any`
+  - Selecionar `Ellipse`
   - Escolher cor
 
 
@@ -128,7 +142,7 @@ Estado final da configuração do projeto após cadastro de labels
 
 Task é um conjunto de imagens a anotar.
 
-![](img/cvat-newtask.png)
+![](img/cvat-new-task.png)
 
 
 #### Configurar Task
@@ -146,7 +160,7 @@ Task é um conjunto de imagens a anotar.
 
 ### Realizar Job
 
-Job é uma sessão de anotações sobre imagens de uma Task.
+- Job é uma sessão de anotações sobre imagens de uma Task.
 
 - Quando uma Task é criada, automaticamente já é criado um Job
 
@@ -155,7 +169,7 @@ Job é uma sessão de anotações sobre imagens de uma Task.
 ![](img/cvat-task-jobs.png)
 
 
-#### Ferramentas e imagem
+#### Imagem e ferramentas
 
 Tela do job mostra a imagem e várias ferramentas
 
@@ -174,13 +188,37 @@ Ovos
 - Selecionar Elipse e Shape no menu à esquerda
 - Desenhar elipse próximo ao ovo
 - Ajustar tamanho e rotação
-- Usar atalhos e copy-paste para os próximos
+- Usar atalhos e copy-paste (Ctrl-C Ctrl-V) para os próximos
 
 
 ![](img/cvat-job.png)
 
+
+#### Anotação de clusters
+
+- Selecionar Polygon e Shape no menu à esquerda
+- Fazer o contorno do agrupamento de ovos:
+
+  - Opção 1: marcando os pontos um a um com o mouse **ou**
+  - Opção 2: pressionando Shift e passando o mouse pela borda do agrupamento (pontos adicionados automaticamente)
+
+- Teclar N para fechar o polígono
+- Ajustar pontos se necessário
+
+![](img/cvat-polygon.png)
+
+
 ## Referências
 
-- Tasks: https://opencv.github.io/cvat/docs/manual/basics/create_an_annotation_task/
+CVAT:
 
-- https://lapix.ufsc.br/ensino/visao/visao-computacionaldeep-learning/deep-learningensinando-rede-ferramentas-de-anotacao/?lang=en
+- CVAT - Create annotation task:<br> https://opencv.github.io/cvat/docs/manual/basics/create_an_annotation_task/
+
+- CVAT - Annotation with polygons:<br> https://opencv.github.io/cvat/docs/manual/advanced/annotation-with-polygons/manual-drawing/
+
+
+Outras ferramentas de anotação:
+
+- Deep Learning::Ensinando à Rede: Ferramentas de Anotação:<br> https://lapix.ufsc.br/ensino/visao/visao-computacionaldeep-learning/deep-learningensinando-rede-ferramentas-de-anotacao/?lang=en
+
+
