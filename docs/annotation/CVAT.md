@@ -212,6 +212,8 @@ Ovos
 
 CVAT:
 
+- CVAT - Projects page:<br> https://opencv.github.io/cvat/docs/manual/advanced/projects/
+
 - CVAT - Create annotation task:<br> https://opencv.github.io/cvat/docs/manual/basics/create_an_annotation_task/
 
 - CVAT - Annotation with polygons:<br> https://opencv.github.io/cvat/docs/manual/advanced/annotation-with-polygons/manual-drawing/
@@ -219,6 +221,8 @@ CVAT:
 
 Outras ferramentas de anotação:
 
-- Deep Learning::Ensinando à Rede: Ferramentas de Anotação:<br> https://lapix.ufsc.br/ensino/visao/visao-computacionaldeep-learning/deep-learningensinando-rede-ferramentas-de-anotacao/?lang=en
+- Deep Learning::Ensinando à Rede: Ferramentas de Anotação: (resumo sobre várias ferramentas)<br> https://lapix.ufsc.br/ensino/visao/visao-computacionaldeep-learning/deep-learningensinando-rede-ferramentas-de-anotacao/?lang=en 
+
+
 
 
