@@ -18,6 +18,7 @@ nvm use v10.23.0
 liascript-devserver --input README.md --port 3001 --live
 -->
 
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/CIPCDengue/master/docs/01-RelatedSoftware/CountingEggs01.md)
 
 # Experimentos de contagem de ovos em ovitrampas
 
