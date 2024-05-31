@@ -9,220 +9,280 @@ language: PT-BR
 
 narrator: Brazilian Portuguese Female
 
-comment:  Resumo sobre anotação de imagens para projeto de contagem de ovos em ovitrampas
+comment:  Resumo sobre aprendizagem de máquina para detecção de ovos
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/CIPCDengue/master/docs/02-AnnotateWithCVAT/CVAT.md)
+<!--
+nvm use v10.23.0
+liascript-devserver --input README.md --port 3001 --live
+-->
+
+
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/CIPCDengue/master/docs/03-TrainObjectDetectionModel/TrainObjectDetectionModel.md)
 
 
 
-# Anotação de imagens com CVAT
+# Machine Learning para Detecção de Ovos em Ovitrampas
 
 
-> Resumo sobre anotação de imagens para projeto de contagem de ovos em ovitrampas
+> Resumo sobre aprendizagem de máquina para detecção de ovos em imagens de ovitrampas
 
 Profa. Andrea Schwertner Charão
 
 Depto. de Linguagens e Sistemas de Computação, Centro de Tecnologia, UFSM
 
 
-## Contexto
+## Objetivo
 
-O que é anotação de imagens?
+O que queremos?
 
-- Processo de demarcação e rotulagem de objetos em imagens
-- Provê contexto e informação de entrada para algoritmos de aprendizagem de máquina
 
-Por que anotar imagens?
 
-- Necessário para treinar modelos de aprendizagem de máquina a reconhecer nossos objetos de interesse
+![](img/blackbox-diagram.png)
 
-- Importante para obter altas taxas de acertos e generalização no reconhecimento / contagem de objetos
 
+## Abrindo a caixa preta
 
+Ciclo de desenvolvimento de um novo detector:
 
-## CVAT (Computer Vision Annotation Tool)
 
-- Uma dentre várias ferramentas populares e em rápida evolução
-- Ferramenta open source (https://github.com/opencv/cvat) associada a serviço em nuvem (https://www.cvat.ai/)
-- Plano gratuito oferece recursos suficientes para nosso caso
+<!--
+style="
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 315px;
+  stroke: green;" -->
 
-![](img/cvat-home.png)
+``` ascii
++------------+     +-------------------+     +------------------+     +----------+     +-----------+
+|  Anotar    |---->|  Selecionar rede  |---->|  Preparar dados  +---->|  Treinar |---->|  Avaliar  +
++------------+     +-------------------+     +------------------+     +----------+     +-----------+
+                            A                          A                                     |
+                            |                          |                                     |
+                            +--------------------------+-------------------------------------+
 
-## Conceitos do workflow de anotação com CVAT
+                                                                                             
+```
 
-- **Organization**: grupo de usuários trabalhando em conjunto
 
-  - Plano gratuito permite 1 organization com 3 usuários
-  - Facilita compartilhamento, mas não é obrigatório
+                 {{1}}
+************************************************
+Anotar imagens para formar *ground truth* (serve tanto para aprendizagem como para avaliação do detector)
+************************************************
 
-- **Project**: conjunto de tarefas de anotação com características em comum
+ 
+                 {{2}}
+************************************************
+Selecionar rede pré-treinada (*transfer learning*)
 
-  - Aqui são definidos labels a serem usados nas anotações (exemplo: egg, cluster, unsure)
+- aprendizagem supervisionada: aprende com o conhecimento expresso pelas anotações 
+- transfer learning: evita muito tempo/trabalho com treino "do zero"
+************************************************
 
-- **Task**: conjunto de uma ou mais imagens a anotar
+                 {{3}}
+************************************************
+Preparar os dados: converter anotações para formato usado pela rede selecionada (imagens, labels, localização dos objetos), processar imagens
+************************************************
 
-  - Usa labels padronizados definidos em Project
+                 {{4}}
+************************************************
+Treinar modelo:
 
-- **Job**: realização de anotações sobre imagens de uma Task
+- separar dataset para treino, validação e teste (geralmente 70%, 20%, 10% das imagens, respectivamente)
 
+- executar número fixo de épocas/passos (p.ex. 1000) ou até atingir condição (mais épocas, mais tempo de processamento) - epochs x steps: https://www.geeksforgeeks.org/what-is-the-difference-between-steps-and-epochs-in-tensorflow/
 
+- executar treinamento inicialmente no Colab (GPU com limite variável), depois no Kaggle (GPU com limite semanal)
 
-## Passo-a-passo
+- exportar modelo: salvar configurações da rede
+************************************************
 
-- Nos próximos slides, temos um resumo de passos essenciais para começarmos a anotar imagens de ovitrampas
-- Estes e outros passos estão detalhados na documentação do CVAT: https://opencv.github.io/cvat/docs/manual/basics/
+                 {{5}}
+************************************************
+ Testar/avaliar modelo
 
-### Criar conta
+- carregar função detectora
 
-Criar uma conta em: https://app.cvat.ai/auth/register (abrir email e clicar no link de confirmação para ativar a conta)
+- aplicar função em imagens de teste
 
-![](img/cvat-register.png)
+- calcular métricas de desempenho: matriz de confusão, precisão, revocação (recall), F1-Score, AP (average precision)
+************************************************
 
-### Após Login
+                 {{6}}
+************************************************
+Analisar resultados, fazer ajustes e repetir a partir do passo 2 ou 3, com ajustes
+************************************************
 
-Após Login, é mostrada uma tela com Tasks (inicialmente vazia)
 
-Tela de Tasks vazia (sem Tasks ciradas ainda):
+### Ferramentas
 
-<img src="img/cvat-empty.png"  width="45%" > 
+- Python + plataformas/frameworkds/bibliotecas (TensorFlow, PyTorch, Scikit-Learn, Detectron2, etc.)
 
-Tela com uma Task criada (ver mais adiante):
+- Notebooks: Google Colab, Kaggle, Paperspace (facilidade sem instalação local + acesso a GPUs)
 
-<img src="img/cvat-task-list.png"  width="45%" >
+- Plataformas low-code / no-code (Roboflow, Dataloop, V7, etc.) 
 
+#### Notebooks Colab
 
-### Criar Project
+- TensorFlow Object Detection: https://www.tensorflow.org/tfmodels/vision/object_detection
+- Conversão de dados (Tiago): https://colab.research.google.com/drive/1YGR6Fb5I_GKj_q9LHcRKRu_MgVJN4JRO?usp=sharing
 
-Project: conjunto de tarefas de anotaçõo com características em comum
+### Selecionando rede
 
-Para criar:
+- Novas redes são publicadas com frequência por empresas e pesquisadores, treinadas com grandes datasets de algumas categorias de objetos
 
-- Menu: Projects
-- Botão: `+` -> `Create a new project`
-- Preencher tela abaixo com configurações do projeto (ver adiante)
+- Transfer learning: reutilizar um modelo pré-treinado como ponto inicial para treinamento com novos objetos e imagens
+
+![](img/Q4BBxOJMV3.png)
 
-![](img/cvat-new-project.png)
+Fonte: dagshub.com
 
-#### Configurar projeto
+### Avaliando desempenho
 
-- Prencher nome do projeto: `eggcounting`
-- Criar labels: clicar em `Add label`
-- A cada novo label, clicar em `Continue`
+Importante conhecer algumas métricas e como calculá-las:
 
-- Label para um ovo (quando for possível distinguir com certeza)
+- Intersection Over Union
+- Matriz de confusão
+- Precisão
+- Recall (revocação)
+- F1-Score
 
-  - Label name: `egg`
-  - Selecionar `Ellipse`
-  - Escolher cor
 
+#### IoU
 
-- Label para um agrupamento de ovos (quando houver sobreposição que impeça distinguir ovos isoladamente)
+- Intersection Over Union
+- Medida objetiva para comparar ground truth com predição do modelo
+- Ver este guia: https://www.v7labs.com/blog/intersection-over-union-guide
 
-  - Label name: `cluster`
-  - Selecionar `Polygon`
-  - Escolher cor
+<img style="padding: 4px 4px 4px 4px;" src="img/6475eb7c65941f46de8b80e9HeroIntersectionoverUnion.jpg" width="35%">
 
-- Label para possível ovo (incerteza)
+<img src="img/647a0de43f2d758b954db3f2_IoUformula.webp" width="45%">
 
-  - Label name: `unsure`
-  - Selecionar `Ellipse`
-  - Escolher cor
+Fonte: V7 Labs
 
+``` python
+def compute_iou(box1, box2):
+    x1 = max(box1[0], box2[0])
+    y1 = max(box1[1], box2[1])
+    x2 = min(box1[2], box2[2])
+    y2 = min(box1[3], box2[3])
+    intersection = max(0, x2 - x1) * max(0, y2 - y1)
+    
+    box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
+    box2_area = (box2[2] - box2[0]) * (box2[3] - box2[1])
+    union = box1_area + box2_area - intersection
+    
+    return intersection / union
+```
 
-#### Projeto configurado com labels
+#### Matriz de confusão
 
-Estado final da configuração do projeto após cadastro de labels
+- True Positive: acertou
+- False Positive: detectou ovo onde não havia
+- False Negative: não detectou ovo onde havia
 
-![](img/cvat-new-project-labels.png)
+![](img/conf_matrix.png)
 
+Fonte: IBM
 
-### Criar Task
 
-Task é um conjunto de imagens a anotar.
+##### Nossas matrizes
 
-![](img/cvat-new-task.png)
 
+Faster R-CNN 3000 steps, score_threshold 0.5
 
-#### Configurar Task
+<!--
+style="
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 315px;
+  stroke: green;" -->
+``` ascii
++-------+-------+
+|       |       |
+|  118  |  89   |
+|       |       |
++-------+-------+
+|       |       |
+|  127  |       |
+|       |       |
++-------+-------+
+```
 
-- Clicar em botão `+` para adicionar Task (`Create a new task`)
+Mystery model :-)
 
-- Name: definir nome da Task
-- Project: selecionar  `eggcounting`
-- Select files: `My computer` (selecionar imagens a serem anotadas)
-- Submit & Open
+<!--
+style="
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 315px;
+  stroke: green;" -->
+``` ascii
++-------+-------+
+|       |       |
+|  122  |  30   |
+|       |       |
++-------+-------+
+|       |       |
+|   24  |       |
+|       |       |
++-------+-------+
+```
 
-#### Task configurada
 
-![](img/cvat-task-jobs.png)
+#### Métricas
 
-### Realizar Job
+Muitos tutoriais explicam as métricas mais usadas:
 
-- Job é uma sessão de anotações sobre imagens de uma Task.
+https://towardsdatascience.com/performance-metrics-confusion-matrix-precision-recall-and-f1-score-a8fe076a2262
 
-- Quando uma Task é criada, automaticamente já é criado um Job
+## Próximas etapas 
 
-- Clicar sobre um Job para ver a imagem e as opções de anotação
+### Exercícios
 
-![](img/cvat-task-jobs.png)
 
 
-#### Imagem e ferramentas
+- Executar notebook / tutorial "object detection" do TensorFlow
+- Executar notebook de conversão de anotações que o Tiago criou
+- Executar notebooks Kaggle - treino e teste
 
-Tela do job mostra a imagem e várias ferramentas
 
-![](img/cvat-job-default.png)
+### Avanços
 
+- Novo ciclo treino-validação-teste com variações:
 
-#### Anotação de ovos
+  - Novas entradas para treino:
 
-Controles
+    - imagens em madeirite
+    - mesmas imagens, mas com outras estratégias de aumento e tiling, incluindo tiles menores/maiores
+    - treino incluindo clusters
 
-- Zoom in/out: scroll do mouse
-- Mover imagem: segurar botão esquerdo do mouse
+  - Outras plataformas/redes (detectron2, etc.)
 
-Ovos
+- Exportar modelo treinado para teste com TensorflowJS
 
-- Selecionar Elipse e Shape no menu à esquerda
-- Desenhar elipse próximo ao ovo
-- Ajustar tamanho e rotação
-- Usar atalhos e copy-paste (Ctrl-C Ctrl-V) para os próximos
+- Criar novos notebooks com scripts para documentar e facilitar novos ciclos do processo
 
 
-![](img/cvat-job.png)
+## Saiba mais
 
+- Maioria dos materiais online são tutoriais rápidos com ferramentas selecionadas ("zoom in" em como usar alguma biblioteca Python para alguma tarefa)
 
-#### Anotação de clusters
+  - Importante se perguntar sobre o que é generalizável ou não
+  - Leva um tempo até "ligar os pontos"
 
-- Selecionar Polygon e Shape no menu à esquerda
-- Fazer o contorno do agrupamento de ovos:
+- Alguns materiais selecionados, explicando conceitos:
 
-  - Opção 1: marcando os pontos um a um com o mouse **ou**
-  - Opção 2: pressionando Shift e passando o mouse pela borda do agrupamento (pontos adicionados automaticamente)
+  - Grant Sanderson. [3Blue1Brown.com](https://www.3blue1brown.com)
 
-- Teclar N para fechar o polígono
-- Ajustar pontos se necessário
+    https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
 
-![](img/cvat-polygon.png)
+  - BuildYourAI. Beginner's Guide to Object Detection With Convolutional Neural Networks
 
-
-## Referências
-
-CVAT:
-
-- CVAT - Projects page:<br> https://opencv.github.io/cvat/docs/manual/advanced/projects/
-
-- CVAT - Create annotation task:<br> https://opencv.github.io/cvat/docs/manual/basics/create_an_annotation_task/
-
-- CVAT - Annotation with polygons:<br> https://opencv.github.io/cvat/docs/manual/advanced/annotation-with-polygons/manual-drawing/
-
-
-Outras ferramentas de anotação:
-
-- Deep Learning::Ensinando à Rede: Ferramentas de Anotação: (resumo sobre várias ferramentas)<br> https://lapix.ufsc.br/ensino/visao/visao-computacionaldeep-learning/deep-learningensinando-rede-ferramentas-de-anotacao/?lang=en 
-
-
+    https://www.youtube.com/watch?v=FDTXFlrCeuk
 
 
