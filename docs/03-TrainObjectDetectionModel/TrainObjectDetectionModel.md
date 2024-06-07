@@ -15,7 +15,7 @@ comment:  Resumo sobre aprendizagem de máquina para detecção de ovos
 
 <!--
 nvm use v10.23.0
-liascript-devserver --input README.md --port 3001 --live
+liascript-devserver --input TrainObjectDetectionModel.md --port 3001 --live
 -->
 
 
@@ -28,9 +28,17 @@ liascript-devserver --input README.md --port 3001 --live
 
 > Resumo sobre aprendizagem de máquina para detecção de ovos em imagens de ovitrampas
 
-Profa. Andrea Schwertner Charão
+<br>
+<br>
+Profa. Andrea Schwertner Charão 
 
 Depto. de Linguagens e Sistemas de Computação, Centro de Tecnologia, UFSM
+<br>
+<br>
+
+Augusto Kist Lunardi, Francisco das Chagas Sousa Júnior, Otávio Gonçalves Lamberty, Tiago Ribeiro Chagas 
+
+Curso de Ciência da Computação, UFSM
 
 
 ## Objetivo
@@ -56,12 +64,12 @@ style="
   stroke: green;" -->
 
 ``` ascii
-+------------+     +-------------------+     +------------------+     +----------+     +-----------+
-|  Anotar    |---->|  Selecionar rede  |---->|  Preparar dados  +---->|  Treinar |---->|  Avaliar  +
-+------------+     +-------------------+     +------------------+     +----------+     +-----------+
-                            A                          A                                     |
-                            |                          |                                     |
-                            +--------------------------+-------------------------------------+
++------------+     +--------------------+     +-------------------+     +------------+     +------------+
+| 1. Anotar  +---->| 2. Selecionar rede +---->| 3. Preparar dados +---->| 4. Treinar +---->| 5. Avaliar |
++------------+     +--------------------+     +-------------------+     +------------+     +------------+
+      A                     A                          A                                     |
+      |                     |                          |                                     |
+      +---------------------+--------------------------+-------------------------------------+
 
                                                                                              
 ```
@@ -83,14 +91,20 @@ Selecionar rede pré-treinada (*transfer learning*)
 
                  {{3}}
 ************************************************
-Preparar os dados: converter anotações para formato usado pela rede selecionada (imagens, labels, localização dos objetos), processar imagens
+Preparar os dados de entrada da rede: 
+
+- converter anotações para formato usado pela rede selecionada (imagens, labels, localização dos objetos)
+- processar imagens, se necessário
+- separar dataset para treino, validação e teste (geralmente 70%, 20%, 10% das imagens, respectivamente)
+
+
 ************************************************
 
                  {{4}}
 ************************************************
 Treinar modelo:
 
-- separar dataset para treino, validação e teste (geralmente 70%, 20%, 10% das imagens, respectivamente)
+- configurar parâmetros de entrada do modelo
 
 - executar número fixo de épocas/passos (p.ex. 1000) ou até atingir condição (mais épocas, mais tempo de processamento) - epochs x steps: https://www.geeksforgeeks.org/what-is-the-difference-between-steps-and-epochs-in-tensorflow/
 
@@ -108,21 +122,28 @@ Treinar modelo:
 - aplicar função em imagens de teste
 
 - calcular métricas de desempenho: matriz de confusão, precisão, revocação (recall), F1-Score, AP (average precision)
+
+- Analisar resultados, fazer ajustes e repetir a partir do passo 1, 2 ou 3, conforme o caso
+
 ************************************************
 
-                 {{6}}
-************************************************
-Analisar resultados, fazer ajustes e repetir a partir do passo 2 ou 3, com ajustes
-************************************************
-
+                 
 
 ### Ferramentas
 
 - Python + plataformas/frameworkds/bibliotecas (TensorFlow, PyTorch, Scikit-Learn, Detectron2, etc.)
 
-- Notebooks: Google Colab, Kaggle, Paperspace (facilidade sem instalação local + acesso a GPUs)
+  - redes neurais pré-treinadas são disponibilizadas por estas ferramentas
+
+- Notebooks: Google Colab, Kaggle, Paperspace 
+
+  - facilidade sem instalação local + acesso a GPUs
 
 - Plataformas low-code / no-code (Roboflow, Dataloop, V7, etc.) 
+
+  - escondem muitas etapas (facilidade, mas com limitações) - não vamos usá-las, mas é bom conhecê-las
+
+
 
 #### Notebooks Colab
 
@@ -133,7 +154,7 @@ Analisar resultados, fazer ajustes e repetir a partir do passo 2 ou 3, com ajust
 
 - Novas redes são publicadas com frequência por empresas e pesquisadores, treinadas com grandes datasets de algumas categorias de objetos
 
-- Transfer learning: reutilizar um modelo pré-treinado como ponto inicial para treinamento com novos objetos e imagens
+- **Transfer learning**: reutilizar um modelo pré-treinado como ponto inicial para treinamento com novos objetos e imagens
 
 ![](img/Q4BBxOJMV3.png)
 
