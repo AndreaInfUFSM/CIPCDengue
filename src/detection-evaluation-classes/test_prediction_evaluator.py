@@ -46,7 +46,7 @@ def test_evaluate_prediction(str_framework, dataset_class, detector_class, datas
     dataset = dataset_class(dataset_path)
     detector = detector_class(model_path)
 
-    fnames, groundtruth_bboxes, groundtruth_labels = dataset.get_groundtruths()
+    fnames, groundtruth_bboxes, groundtruth_labels = dataset.get_groundtruth()
     fnames, predicted_bboxes, predicted_labels, predicted_scores = detector.get_predictions_for_dataset(dataset)
 
     for class_id in dataset.get_unique_classes():
