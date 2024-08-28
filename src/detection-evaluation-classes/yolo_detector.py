@@ -5,25 +5,19 @@ class YoloObjectDetector(DetectorInterface):
 
         
 
-    def __init__(self, path):
-        super().__init__(path)
+    def __init__(self, path, configs):
+        # configs are ignored in this detector class, because we don't need to denormalize predicted bboxes
         self.model_fn = self.get_model_fn(path)
 
 
     def get_model_fn(self, model_path):
         
-        #model_pt = '/home/andrea/Dropbox/lsc/dengue/training-round-02/yolo-trained-model/v5-best.pt'
 
         model_fn = YOLO(model_path)  # load the trained model
         return model_fn
     
 
-
-
          
-    # Denormalize predicted bboxes' elements
-    def denormalize_fn(self, element):
-        return int(element / 256 * 416)    
 
     def get_predictions_for_image(self, image):        
 

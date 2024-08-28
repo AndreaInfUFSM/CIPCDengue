@@ -13,18 +13,14 @@ class TFObjectDetector(DetectorInterface):
 
         
 
-    def __init__(self, path):
-        super().__init__(path)
+    def __init__(self, path, configs):
+        # super().__init__(path, default_model_size, default_img_size)
         self.model_fn = self.get_model_fn(path)
-
+        self.configs = configs
+        
 
     def get_model_fn(self, saved_model_path):
         
-      #saved_model_path = '/home/andrea/Dropbox/lsc/dengue/tensorflow-conda/aedes-egg-detection-3000steps/exported_model/'
-      # Load the saved model
-      # model = tf.keras.models.load_model(saved_model_path)
-      # model = keras.layers.TFSMLayer(saved_model_path, call_endpoint='serving_default')
-
       imported = tf.saved_model.load(saved_model_path)
       model_fn = imported.signatures['serving_default'] 
       return model_fn
@@ -35,7 +31,7 @@ class TFObjectDetector(DetectorInterface):
          
     # Denormalize predicted bboxes' elements
     def denormalize_fn(self, element):
-        return int(element / 256 * 416)    
+        return int(element / self.configs['model_size'] * self.configs['img_size'])
 
     def get_predictions_for_image(self, image):        
 
